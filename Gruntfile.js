@@ -125,6 +125,18 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      release: {
+        options: {
+          force: true
+        },
+        files: [{
+          dot: true,
+          src: [
+            '<%= config.release %>/*',
+            '!<%= config.release %>/.git*',
+          ]
+        }]
+      },
       server: '.tmp'
     },
 
@@ -347,9 +359,11 @@ module.exports = function (grunt) {
           expand: true,
           dot: true,
           cwd: '<%= config.dist %>',
-          dest: '../Build',
+          dest: '<%= config.release %>',
           src: [
-            '*'
+            '*',
+            '**',
+            '*.*'
           ]
         }]
       }
@@ -411,6 +425,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('release', function (target) {
     grunt.task.run([
+      'clean:release',
       'copy:release'
     ]);
   });

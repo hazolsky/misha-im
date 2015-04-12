@@ -334,6 +334,7 @@ module.exports = function (grunt) {
           cwd: '<%= config.app %>',
           dest: '<%= config.dist %>',
           src: [
+            'CNAME',
             '*.{ico,png,txt}',
             'images/{,*/}*.webp',
             '{,*/}*.html',
@@ -345,9 +346,11 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= config.app %>',
-          dest: '<%= config.release %>',
-          src: '<%= config.dist %>'
+          cwd: '<%= config.dist %>',
+          dest: '../Build',
+          src: [
+            '*'
+          ]
         }]
       }
     },
@@ -406,6 +409,12 @@ module.exports = function (grunt) {
     ]);
   });
 
+  grunt.registerTask('release', function (target) {
+    grunt.task.run([
+      'copy:release'
+    ]);
+  });
+
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
@@ -418,10 +427,7 @@ module.exports = function (grunt) {
     'copy:dist',
     'filerev',
     'usemin',
-    'htmlmin',
-    // copy files to release directory from which
-    // we can deploy build to github pages server using git
-    'copy:release'
+    'htmlmin'
   ]);
 
   grunt.registerTask('default', [

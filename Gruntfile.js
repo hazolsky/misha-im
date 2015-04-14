@@ -174,13 +174,16 @@ module.exports = function (grunt) {
           cleancss: true,
           report: 'gzip'
         },
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>/styles',
-          src: '*.less',
-          dest: '.tmp/styles',
-          ext: '.css'
-        }]
+        // files: [{
+        //   expand: true,
+        //   cwd: '<%= config.app %>/styles',
+        //   src: '*.less',
+        //   dest: '.tmp/styles',
+        //   ext: '.css'
+        // }]
+        files: {
+          '.tmp/styles/app.css': '<%= config.app %>/styles/app.less'
+        }
       },
       server: {
         options: {
@@ -188,13 +191,16 @@ module.exports = function (grunt) {
           sourceMapBasepath: '<%= config.app %>/',
           sourceMapRootpath: '../'
         },
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>/styles',
-          src: '*.less',
-          dest: '.tmp/styles',
-          ext: '.css'
-        }]
+        // files: [{
+        //   expand: true,
+        //   cwd: '<%= config.app %>/styles',
+        //   src: '*.less',
+        //   dest: '.tmp/styles',
+        //   ext: '.css'
+        // }]
+        files: {
+          '.tmp/styles/app.css': '<%= config.app %>/styles/app.less'
+        }
       }
     },
 
